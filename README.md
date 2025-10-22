@@ -1,5 +1,7 @@
 # RandomText Class Randomizer
 
+[Live Demo](https://anangbakti.github.io/RandomText/RandomText/Bridge/www/demo.html)
+
 ## Description
 RandomText is a simple web-based application that allows users to randomize and group class names (kelas) for educational or organizational purposes. It generates a predefined list of classes (X.1 to X.11, XI.1 to XI.12, XII.1 to XII.4, and XII.6 to XII.11) and provides options to shuffle them or pair them into two groups.
 
