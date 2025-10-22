@@ -5,6 +5,7 @@
         statics: {
             kelas: "",
             divHasilUrut: null,
+            inputKelas: null,
             createDivResult: function () {
                 RandomText.App.divHasilUrut = Bridge.cast(document.getElementById("divHasilUrut"), HTMLDivElement);
                 if (RandomText.App.divHasilUrut == null) {
@@ -19,7 +20,7 @@
                 var $t;
                 RandomText.App.createDivResult();
 
-                var arrKelas = System.Linq.Enumerable.from(RandomText.App.kelas.split(",")).toList(String);
+                var arrKelas = System.Linq.Enumerable.from(RandomText.App.inputKelas.value.split(",")).toList(String);
                 var jumlahKelas = arrKelas.getCount();
                 var rand = new System.Random.ctor();
 
@@ -44,7 +45,7 @@
                 var $t;
                 RandomText.App.createDivResult();
 
-                var arrKelas = System.Linq.Enumerable.from(RandomText.App.kelas.split(",")).toList(String);
+                var arrKelas = System.Linq.Enumerable.from(RandomText.App.inputKelas.value.split(",")).toList(String);
                 var jumlahKelas = arrKelas.getCount();
                 var rand = new System.Random.ctor();
 
@@ -118,10 +119,52 @@
                 classes.push("XII." + i);
             }
             // Set the kelas string
-            RandomText.App.kelas = classes.join(",");
+            var style = document.createElement('style');
+            style.innerHTML = `.textarea-container {
+  /* Mengatur lebar maksimum wadah agar responsif */
+  max-width: 800px; /* Lebar maksimal dapat disesuaikan */
+  width: 90%; /* Lebar akan 90% dari parent, menyesuaikan ukuran layar */
+  
+  /* Pemusatan (Centering) wadah secara horizontal */
+  margin: 20px auto; 
+  /* 'auto' pada margin kiri dan kanan akan memusatkan elemen blok */
+}
 
-            var divNamaKelas = document.createElement('div');
-            divNamaKelas.innerHTML = RandomText.App.kelas;
+#longText {
+  /* Membuat textarea memenuhi lebar wadahnya */
+  width: 100%; 
+  
+  /* Menghilangkan atau menyesuaikan padding/border bawaan */
+  padding: 10px;
+  box-sizing: border-box; /* Penting agar padding tidak menambah lebar */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  
+  /* Opsional: Membuat textarea tidak bisa diubah ukurannya oleh user */
+  resize: vertical; /* Hanya izinkan resize vertikal, atau 'none' untuk menonaktifkan */
+}
+
+.button-container {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 800px;
+  width: 90%;
+}`;
+            document.head.appendChild(style);
+
+            var textareaContainer = document.createElement('div');
+            textareaContainer.className = 'textarea-container';
+
+            RandomText.App.inputKelas = Bridge.merge(document.createElement('textarea'), {
+                id: "longText",
+                name: "longText",
+                rows: "10",
+                placeholder: "Masukkan nama kelas di sini..."
+            });
+            RandomText.App.inputKelas.value = classes.join(",");
+
+            textareaContainer.appendChild(RandomText.App.inputKelas);
+            document.body.appendChild(textareaContainer);
 
             var buttonRandomizeKelas = Bridge.merge(document.createElement('button'), {
                 innerHTML: "Randomize Kelas"
@@ -135,10 +178,13 @@
 
 
 
+            var buttonContainer = document.createElement('div');
+            buttonContainer.className = 'button-container';
+            buttonContainer.appendChild(buttonRandomizeKelas);
+            buttonContainer.appendChild(buttonRandomize2GroupKelas);
+
             // Add the Button to the page
-            document.body.appendChild(divNamaKelas);
-            document.body.appendChild(buttonRandomizeKelas);
-            document.body.appendChild(buttonRandomize2GroupKelas);
+            document.body.appendChild(buttonContainer);
         }
     });
 
