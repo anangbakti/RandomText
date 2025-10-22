@@ -3,7 +3,7 @@
 
     Bridge.define("RandomText.App", {
         statics: {
-            kelas: "X IBB 1, X IPA 1, X IPA 2, X IPA 3, X IPA 4, X IPA 5, X IPA 6, X IPA 7, X IPA 8, X IPS 1, X IPS 2, X IPS 3, X IPS 4, X IPS 5, XI IBB 1, XI IPA 1, XI IPA 2, XI IPA 3, XI IPA 4, XI IPA 5, XI IPA 6, XI IPA 7, XI IPA 8, XI IPS 1, XI IPS 2, XI IPS 3, XI IPS 4, XI IPS 5, XII IBB 1, XII IBB 2, XII IPA 1, XII IPA 2, XII IPA 3, XII IPA 4, XII IPA 5, XII IPA 6, XII IPA 7, XII IPA 8, XII IPS 1, XII IPS 2, XII IPS 3, XII IPS 4 ",
+            kelas: "",
             divHasilUrut: null,
             createDivResult: function () {
                 RandomText.App.divHasilUrut = Bridge.cast(document.getElementById("divHasilUrut"), HTMLDivElement);
@@ -99,6 +99,27 @@
             }
         },
         $main: function () {
+            // Generate the array of classes
+            var classes = [];
+            // X.1 to X.11 (10.1 to 10.11)
+            for (var i = 1; i <= 11; i++) {
+                classes.push("X." + i);
+            }
+            // XI.1 to XI.12 (11.1 to 11.12)
+            for (var i = 1; i <= 12; i++) {
+                classes.push("XI." + i);
+            }
+            // XII.1 to XII.4 (12.1 to 12.4)
+            for (var i = 1; i <= 4; i++) {
+                classes.push("XII." + i);
+            }
+            // XII.6 to XII.11 (12.6 to 12.11)
+            for (var i = 6; i <= 11; i++) {
+                classes.push("XII." + i);
+            }
+            // Set the kelas string
+            RandomText.App.kelas = classes.join(",");
+
             var divNamaKelas = document.createElement('div');
             divNamaKelas.innerHTML = RandomText.App.kelas;
 
